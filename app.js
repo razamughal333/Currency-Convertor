@@ -1,12 +1,10 @@
-const BASE_URL = "https://api.exchangerate-api.com/v4/latest";
-
-const dropdowns = document.querySelectorAll(".dropdown select");
+const dropdown = document.querySelectorAll(".countries select");
 const btn = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
 const toCurr = document.querySelector(".to select");
 const msg = document.querySelector(".msg");
 
-for (let select of dropdowns) {
+for (let select of dropdown) {
   for (let currCode in countryList) {
     let newOption = document.createElement("option");
     newOption.innerText = currCode;
@@ -31,7 +29,7 @@ const updateExchangeRate = async () => {
     amtVal = 1;
     amount.value = "1";
   }
-  const URL = `${BASE_URL}/${fromCurr.value.toUpperCase()}`;
+  const URL = `${"https://api.exchangerate-api.com/v4/latest"}/${fromCurr.value.toUpperCase()}`;
   let response = await fetch(URL);
   let data = await response.json();
   let rate = data.rates[toCurr.value.toUpperCase()];
@@ -43,7 +41,7 @@ const updateExchangeRate = async () => {
 const updateFlag = (element) => {
   let currCode = element.value;
   let countryCode = countryList[currCode];
-  let newSrc = `https://flagsapi.com/${countryCode}/flat/64.png`;
+  let newSrc = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
   let img = element.parentElement.querySelector("img");
   img.src = newSrc;
 };
